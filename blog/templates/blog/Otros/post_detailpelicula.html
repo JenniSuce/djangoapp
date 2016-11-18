@@ -7,8 +7,8 @@
                     {{ post.creacion_date }}
                 </div>
             {% endif %}
-            <h1>{{ post.autor }}</h1>
-            <p>{{ post.titulo|linebreaksbr }}</p>
-
+            <a class="btn btn-default" href="{% url 'editar_pelicula' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+            <h1>{{ post.nombre }}</h1>
+            <p>{{ post.anio|linebreaksbr }}</p>
         </div>
     {% endblock %}

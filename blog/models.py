@@ -4,7 +4,11 @@ from django.utils import timezone
 class Postear(models.Model):
     autor = models.ForeignKey('auth.User')
     titulo = models.CharField(max_length=200)
-    texto = models.TextField()
+    ISBN = models.TextField()
+    Portada = models.TextField()
+    Editorial = models.TextField()
+    pais = models.TextField()
+    years= models.TextField()
     creacion_date = models.DateTimeField(
                     default=timezone.now)
     publicacion_date = models.DateTimeField(

@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in Libro %}
+        <div class="post">
+            <div class="date">
+                {{ post.creacion_date }}
+            </div>
+            <h1><a href="{% url 'blog.views.post_detail' pk=post.pk %}">{{ post.titulo }}</a></h1>
+            <p>{{ post.titulo|linebreaksbr }}</p>
+
+        </div>
+    {% endfor %}
+{% endblock content %}

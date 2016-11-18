@@ -1,12 +1,17 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Postear
 from django.utils import timezone
-from .forms import PostearForm
 
-# Create your views here.
-def listar_articulo(request):
-    articulo = Postear.objects.all()
-    return render(request, 'blog/listar_articulo.html', {'articulo':articulo})
+def listar_libro(request):
+    autor = Postear.objects.all()
+    titulo = Postear.objects.all()
+    ISBN = Postear.objects.all()
+    Portada = Postear.objects.all()
+    Editorial = Postear.objects.all()
+    pais = Postear.objects.all()
+    year= Postear.objects.all()
+    return render(request, 'blog/listar_libro.html', {'titulo':titulo})
+
 
 def post_detail(request, pk):
     post = get_object_or_404(Postear, pk=pk)
@@ -18,24 +23,16 @@ def postear_nuevo(request):
         if formulario.is_valid():
             postear = formulario.save(commit=False)
             postear.autor = request.user
+            postear.titulo = request.user
+            postear.ISBN = request.user
+            postear.Portada = request.user
+            postear.Editorial = request.user
+            postear.pais = request.user
+            postear.years = request.user
             postear.publicacion_date = timezone.now()
             postear.save()
             return redirect('blog.views.post_detail', pk=postear.pk)
     else:
         formulario = PostearForm()
     formulario = PostearForm()
-    return render(request, 'blog/editar_articulo.html', {'formulario': formulario})
-
-def editar_articulo(request, pk):
-    articulo = get_object_or_404(Postear, pk=pk)
-    if request.method == "POST":
-        formulario = PostearForm(request.POST, instance=articulo)
-        if formulario.is_valid():
-            articulo = formulario.save(commit=False)
-            articulo.autor = request.user
-            articulo.save()
-            return redirect('blog.views.post_detail', pk=articulo.pk)
-    else:
-        formulario = PostearForm(instance=articulo)
-    #formulario = PostearForm()
-    return render(request, 'blog/editar_articulo.html', {'formulario': formulario})
+    return render(request, 'blog/editar_libro.html', {'formulario': formulario})
